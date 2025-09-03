@@ -11,8 +11,8 @@ const products = [
 ];
 
 const TopProducts = () => {
-  const allInvoices = useSelector((state) => state.allInvoices);
-  const allProducts = useSelector((state) => state.allProducts);
+  const allInvoices = useSelector((state) => state.allInvoices.allInvoices);
+  const allProducts = useSelector((state) => state.allProducts.allProducts);
 
   console.log("allInvoices: ", allInvoices);
   console.log("allProducts: ", allProducts);
@@ -52,12 +52,10 @@ const TopProducts = () => {
 
           return (
             <div key={index} className={styles.row}>
-              <span className={styles.name}>
-                {item.productName}
-              </span>
+              <span className={styles.name}>{item.productName}</span>
               <div className={styles.imageContainer}>
                 <img
-                  src={item?.imageUrl} 
+                  src={item?.imageUrl}
                   alt={item.productName ?? "product"}
                   className={styles.imageStyle}
                 />
