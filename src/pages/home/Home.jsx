@@ -9,6 +9,7 @@ import { addAllInvoices } from "../../utils/allInvoiceSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { addAllProducts } from "../../utils/allProductSlice";
 import axios from "axios";
+import { useLocation, useOutletContext } from "react-router-dom";
 
 const base_url = import.meta.env.VITE_APP_BASE_URL;
 
@@ -88,6 +89,7 @@ const Home = () => {
 
   useEffect(() => {
     const fetchInvoices = async () => {
+      console.log("global fetch called");
       try {
         const res = await axios.get(`${base_url}/fetch/invoices`);
 
@@ -111,8 +113,8 @@ const Home = () => {
 
     fetchInvoices();
     fetchProducts();
-  }, []);
-
+  }, [dispatch]);
+  
   const handleDragStart = (id) => setDraggingId(id);
 
   const handleDrop = (draggedId, targetId) => {

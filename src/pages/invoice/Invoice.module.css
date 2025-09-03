@@ -20,7 +20,7 @@
 
 @media (max-width: 1279px) {
   .container {
-    padding-bottom: 93px;
+    padding-bottom: 11px;
   }
 
   .eyeIcon {
@@ -31,5 +31,11 @@
   .deleteIcon {
     width: 25px;
     height: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-bottom: 93px;
   }
 }

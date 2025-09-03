@@ -13,7 +13,11 @@ import {
   updateInvoice,
 } from "../../utils/invoiceSlice";
 import { toast } from "react-toastify";
-import { incrementOpenCount } from "../../utils/allInvoiceSlice";
+import {
+  incrementOpenCount,
+  removeAllInvoice,
+  updateAllInvoice,
+} from "../../utils/allInvoiceSlice";
 
 const base_url = import.meta.env.VITE_APP_BASE_URL;
 
@@ -26,6 +30,7 @@ const Invoice = () => {
 
   const { setInvoiceOpen, setOpenedInvoiceId, search } = useOutletContext();
 
+  const [invoiceOpenCount, setInvoiceOpenCount] = useState();
   const [deleteInvoiceId, setDeleteInvoiceId] = useState(null);
   const [pagination, setPagination] = useState({
     page: 1,
@@ -69,7 +74,7 @@ const Invoice = () => {
       ),
     },
   ];
-
+  
   useEffect(() => {
     const fetchInvoices = async () => {
       try {
@@ -97,6 +102,7 @@ const Invoice = () => {
     try {
       await axios.delete(`${base_url}/invoice/${id}`);
       dispatch(removeInvoice(id));
+      dispatch(removeAllInvoice(id));
       toast.success("Invoice deleted successfully");
       setDeleteInvoiceId(null);
     } catch (error) {
@@ -113,6 +119,14 @@ const Invoice = () => {
 
       dispatch(
         updateInvoice({
+          id,
+          status: "Paid",
+          referenceNumber: res.data.invoice.referenceNumber,
+        })
+      );
+
+      dispatch(
+        updateAllInvoice({
           id,
           status: "Paid",
           referenceNumber: res.data.invoice.referenceNumber,
@@ -157,10 +171,17 @@ const Invoice = () => {
     const paidInvoices = list.filter((inv) => inv?.status === "Paid");
     const unpaidInvoices = list.filter((inv) => inv?.status === "Unpaid");
 
+    console.log("unpaidInvoices: ", unpaidInvoices);
+    const invoiceOpenCount = list.reduce(
+      (sum, inv) => sum + (inv.openCount || 0),
+      0
+    );
+
     const paidAmount = paidInvoices?.reduce(
       (sum, inv) => sum + (inv.amount || 0),
       0
     );
+
     const unpaidAmount = unpaidInvoices?.reduce(
       (sum, inv) => sum + (inv.amount || 0),
       0
@@ -175,7 +196,7 @@ const Invoice = () => {
       {
         value: totalInvoices,
         label: "Total Invoices",
-        subValue: 10,
+        subValue: invoiceOpenCount,
         subLabel: "Last 7 days",
         subLabel1: "Processed",
       },

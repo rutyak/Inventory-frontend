@@ -67,7 +67,7 @@ const Product = () => {
             prod?.createdAt,
             prod?.updatedAt,
           ]
-            .filter(Boolean) // remove null/undefined/empty
+            .filter(Boolean) 
             .some((field) => field.toString().toLowerCase().includes(query));
         })
       : [];

@@ -47,7 +47,6 @@ const AddIndividualProduct = () => {
 
   const { setIsAddProductOpen } = useOutletContext();
 
-  // Handle text/number input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({

@@ -72,6 +72,51 @@
   height: 100%;
 }
 
+.dropdown {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.dropdown:hover {
+  background: #f0f0f0;
+}
+
+.dropdown img {
+  width: 18px;
+  height: 18px;
+}
+
+.select {
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  cursor: pointer;
+  appearance: none; 
+  padding-right: 16px;
+}
+
+.select::-ms-expand {
+  display: none; 
+}
+
+.dropdown::after {
+  content: "";
+  font-size: 10px;
+  margin-left: -16px;
+  pointer-events: none;
+  color: #666;
+}
+
 @media (max-width: 450px) {
   .card {
     height: 369px;

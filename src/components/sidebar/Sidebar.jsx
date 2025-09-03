@@ -8,7 +8,7 @@ import SettingIcon from "../../assets/icons/SettingIcon.svg";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const Sidebar = () => {
+const Sidebar = ({ setPageName }) => {
   const user = useSelector((state) => state.user);
 
   return (
@@ -20,12 +20,12 @@ const Sidebar = () => {
       <hr style={{ border: "1px solid #424457" }} />
 
       <nav className={styles.navMenu}>
-        <Link to="/dashboard" className={styles.navItem}>
+        <Link to="/dashboard" className={styles.navItem} onClick={() => setPageName("Home")}>
           <img src={HomeIcon} alt="homeIcon" className={styles.iconSize} />
           <span>Home</span>
         </Link>
 
-        <Link to="/dashboard/product" className={styles.navItem}>
+        <Link to="/dashboard/product" className={styles.navItem} onClick={() => setPageName("Product")}>
           <img
             src={ProductIcon}
             alt="productionIcon"
@@ -34,7 +34,7 @@ const Sidebar = () => {
           <span>Product</span>
         </Link>
 
-        <Link to="/dashboard/invoice" className={styles.navItem}>
+        <Link to="/dashboard/invoice" className={styles.navItem} onClick={() => setPageName("Invoice")}>
           <img
             src={InvoiceIcon}
             alt="invoiceIcon"
@@ -43,7 +43,7 @@ const Sidebar = () => {
           <span>Invoice</span>
         </Link>
 
-        <Link to="/dashboard/statistics" className={styles.navItem}>
+        <Link to="/dashboard/statistics" className={styles.navItem} onClick={() => setPageName("Statistics")}>
           <img
             src={SatisticsIcon}
             alt="satisticsIcon"
@@ -52,7 +52,7 @@ const Sidebar = () => {
           <span>Statistics</span>
         </Link>
 
-        <Link to="/dashboard/settings" className={styles.navItem}>
+        <Link to="/dashboard/settings" className={styles.navItem} onClick={() => setPageName("Settings")}>
           <img
             src={SettingIcon}
             alt="settingIcon"

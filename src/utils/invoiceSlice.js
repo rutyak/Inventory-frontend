@@ -6,10 +6,15 @@ const invoiceSlice = createSlice({
   reducers: {
     addInvoices: (state, action) => action.payload,
     updateInvoice: (state, action) => {
-      const { id, status } = action.payload;
+      const { id, status, referenceNumber } = action.payload;
       const invoice = state.find((inv) => inv._id === id);
       if (invoice) {
-        invoice.status = status;
+        if (status) {
+          invoice.status = status;
+        }
+        if (referenceNumber) {
+          invoice.referenceNumber = referenceNumber;
+        }
       }
     },
     removeInvoice: (state, action) => {

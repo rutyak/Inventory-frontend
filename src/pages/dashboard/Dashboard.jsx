@@ -63,6 +63,7 @@ const Dashboard = () => {
   const [isAddProductOpen, setIsAddProductOpen] = useState(false);
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
   const [orderedProductId, setOrderedProductId] = useState(false);
+  const [pageName, setPageName] = useState("Home");
   const [search, setSearch] = useState("");
 
   const location = useLocation();
@@ -78,7 +79,7 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboard}>
-      {!isMobile && <Sidebar />}
+      {!isMobile && <Sidebar setPageName={setPageName} />}
 
       <main className={styles.main}>
         {isMobile ? (
@@ -104,7 +105,7 @@ const Dashboard = () => {
         ) : (
           <header className={styles.header}>
             <div className={styles.innerHeader}>
-              <h2 className={styles.pageTitle}></h2>
+              <h2 className={styles.pageTitle}>{pageName}</h2>
               <div className={styles.searchBox}>
                 <img
                   src={SearchIcon}
@@ -150,6 +151,7 @@ const Dashboard = () => {
                 setIsOrderModalOpen,
                 setOrderedProductId,
                 search,
+                pageName,
               }}
             />
           )}

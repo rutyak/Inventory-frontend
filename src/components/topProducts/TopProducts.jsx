@@ -11,8 +11,8 @@ const products = [
 ];
 
 const TopProducts = () => {
-  const allInvoices = useSelector((state) => state.allInvoices.allInvoices);
-  const allProducts = useSelector((state) => state.allProducts.allProducts);
+  const allInvoices = useSelector((state) => state.allInvoices);
+  const allProducts = useSelector((state) => state.allProducts);
 
   console.log("allInvoices: ", allInvoices);
   console.log("allProducts: ", allProducts);

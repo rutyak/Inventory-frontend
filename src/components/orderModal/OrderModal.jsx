@@ -2,12 +2,16 @@ import { useState } from "react";
 import styles from "./OrderModal.module.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { addInvoiceData } from "../../utils/allInvoiceSlice";
+import { useDispatch } from "react-redux";
 
 const base_url = import.meta.env.VITE_APP_BASE_URL;
 
 const OrderModal = ({ isOpen, onClose, productId }) => {
   const [quantity, setQuantity] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
 
   if (!isOpen) return null;
 
@@ -43,8 +47,9 @@ const OrderModal = ({ isOpen, onClose, productId }) => {
       };
 
       const res = await axios.post(`${base_url}/invoice`, invoicePayload);
-      console.log("Invoice created: ", res.data);
+      console.log("Invoice created: ", res.data?.invoice);
 
+      dispatch(addInvoiceData(res.data?.invoice));
       toast.success("Order placed successfully!");
       resetAndClose();
     } catch (error) {
